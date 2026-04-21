@@ -1,19 +1,36 @@
-# 🎲 Dice Roller - Tabletop RPG Companion
+# 🎲 Tabletop Gaming Companion
 
-A mobile-first web application for rolling tabletop RPG dice with beautiful pseudo-3D animations.
+A mobile-first web application featuring multiple gaming utilities including dice rolling, coin tossing, and card games with beautiful animations.
 
 ## Features
 
-### Phase 1 (Current Implementation)
-
+### 🎲 Dice Roller
 - ✅ **Multiple Dice Types**: Support for D4, D6, D8, D10, D12, D20, and D100
 - ✅ **Configurable Dice Counts**: Select 0-20 dice of each type
 - ✅ **Pseudo-3D Animations**: Smooth, performant dice rolling animations
 - ✅ **Instant Results**: Immediate calculation and display of results
 - ✅ **Results Breakdown**: View individual die results grouped by type
+- ✅ **Performance Optimization**: Automatic simplified animations for 10+ dice
+
+### 🪙 Coin Tosser
+- ✅ **Professional SVG Coins**: High-quality gold (heads) and silver (tails) coin designs
+- ✅ **Smooth Flip Animation**: Realistic coin flipping effect
+- ✅ **Instant Results**: Clear display of heads or tails outcome
+- ✅ **Touch-Optimized**: Easy one-tap coin tossing
+
+### 🃏 Card Game (Higher or Lower)
+- ✅ **Full 54-Card Deck**: Complete poker deck with 52 cards + 2 Jokers
+- ✅ **Professional Card Designs**: Beautiful SVG playing cards with all suits (♥♦♣♠)
+- ✅ **Joker Cards**: Special wild cards that grant automatic wins
+- ✅ **Smooth Animations**: Card flip and shake effects
+- ✅ **Score Tracking**: Keep track of your winning streak
+- ✅ **Strategic Gameplay**: Guess if the mystery card is higher or lower
+- ✅ **Continuous Play**: Correct guesses continue the game with the revealed card
+
+### 📱 General Features
+- ✅ **Multi-Feature Navigation**: Easy burger menu to switch between features
 - ✅ **Mobile-First Design**: Optimized for touch interfaces
 - ✅ **Progressive Web App**: Install on your device for offline use
-- ✅ **Performance Optimization**: Automatic simplified animations for 10+ dice
 - ✅ **Accessibility**: Keyboard navigation and screen reader support
 
 ## Quick Start
@@ -41,26 +58,48 @@ Then open `http://localhost:8000` in your browser.
 
 ## How to Use
 
+### 🎲 Dice Roller
 1. **Select Dice**: Use the + and - buttons to choose how many of each die type you want to roll
 2. **Roll**: Press the large "ROLL" button
 3. **View Results**: Watch the animated dice roll and see your results
 4. **Reset**: Press "Reset" to clear all dice selections
 
-### Keyboard Shortcuts
-
+**Keyboard Shortcuts:**
 - `R` - Roll dice
 - `Space/Enter` - Roll dice (when Roll button is focused)
 - `Escape` - Reset
 
+### 🪙 Coin Tosser
+1. **Toss Coin**: Tap the "TOSS COIN" button
+2. **View Result**: Watch the coin flip animation
+3. **Result Display**: See if you got Heads (gold) or Tails (silver)
+
+### 🃏 Card Game
+1. **Understand the Game**: One card is visible, one is face-down (mystery card)
+2. **Make Your Guess**: Press "▲ HIGHER" or "▼ LOWER" to guess if the mystery card has a higher or lower value
+3. **Watch the Reveal**: The mystery card flips over to reveal the result
+4. **Score Points**: Correct guesses earn points and let you continue playing
+5. **Joker Bonus**: If you reveal a Joker (★), you automatically win that round!
+6. **Continue or Restart**: Keep playing to build your streak, or press "🔄 New Game" to start fresh
+
+**Card Values:**
+- Ace = 1, 2-10 = face value, Jack = 11, Queen = 12, King = 13
+- Jokers = automatic win (bypass higher/lower rules)
+
+### 🍔 Navigation
+- Tap the burger menu icon (☰) in the top-left corner
+- Select your desired feature from the menu
+- Press the × to close the menu
+
 ## Project Structure
 
 ```
-dice-roller/
-├── index.html              # Main HTML file
+tabletop-companion/
+├── index.html              # Main HTML file with all features
 ├── manifest.json           # PWA manifest
 ├── service-worker.js       # Service worker for offline support
 ├── css/
-│   ├── styles.css          # Main styles
+│   ├── styles.css          # Main styles and all feature styling
 │   ├── dice-icons.css      # Dice-specific styling
 │   └── animations.css      # Animation effects
 ├── js/
@@ -70,8 +109,11 @@ dice-roller/
 │   ├── animation-engine.js # Animation controller
 │   ├── ui-controller.js    # UI updates
 │   ├── app.js              # Main application
-│   └── pwa.js              # PWA support
-├── icons/                  # PWA icons (to be created)
+│   ├── pwa.js              # PWA support
+│   ├── navigation.js       # Navigation controller & feature logic
+│   ├── coin-svg.js         # Coin SVG designs
+│   └── card-svg.js         # Playing card SVG designs
+├── icons/                  # PWA icons
 └── README.md              # This file
 ```
 
@@ -119,20 +161,15 @@ You can use any tool to create a simple dice icon. Here's a suggested design:
 - Icon: White dice symbol (🎲) or geometric dice shape
 - Style: Flat design with slight shadow
 
-## Future Enhancements (Phase 2 & 3)
+## Future Enhancements
 
-### Phase 2 - Local Multiplayer
-- Roll history with timestamps
-- Multiple player profiles
-- Shared device turn-based rolling
-- Roll statistics
-
-### Phase 3 - Online Features
-- User accounts
-- Cloud sync
-- Real-time multiplayer
-- Custom dice sets
-- Game presets
+### Potential Features
+- 📊 **Statistics Dashboard**: Track your dice rolls, coin tosses, and card game wins
+- 🏆 **Achievements**: Unlock badges for milestones
+- 🎨 **Themes**: Customizable color schemes and card designs
+- 💾 **Save History**: View past rolls and game results
+- 👥 **Multiplayer Mode**: Share games with friends
+- 🎮 **More Games**: Blackjack, poker hand evaluator, etc.
 
 ## Development
 
@@ -145,8 +182,11 @@ The codebase follows a modular architecture:
 3. **dice-engine.js**: Pure logic for rolling dice
 4. **animation-engine.js**: Visual animation system
 5. **ui-controller.js**: DOM manipulation and events
-6. **app.js**: Application lifecycle
-7. **pwa.js**: Progressive Web App features
+6. **app.js**: Application lifecycle and dice roller initialization
+7. **navigation.js**: Multi-feature navigation and coin tosser/card game logic
+8. **coin-svg.js**: SVG designs for heads and tails coins
+9. **card-svg.js**: SVG designs for all 54 playing cards
+10. **pwa.js**: Progressive Web App features
 
 ### Adding New Dice Types
 
@@ -184,4 +224,4 @@ For issues or questions:
 
 ---
 
-**Happy Rolling! 🎲**
+**Happy Gaming! 🎲🪙🃏**

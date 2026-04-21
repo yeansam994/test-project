@@ -5,19 +5,23 @@
 
 const CACHE_NAME = 'dice-roller-v1.0.0';
 const ASSETS_TO_CACHE = [
-    '/',
-    '/index.html',
-    '/css/styles.css',
-    '/css/dice-icons.css',
-    '/css/animations.css',
-    '/js/config.js',
-    '/js/state-manager.js',
-    '/js/dice-engine.js',
-    '/js/animation-engine.js',
-    '/js/ui-controller.js',
-    '/js/app.js',
-    '/js/pwa.js',
-    '/manifest.json'
+    './',
+    './index.html',
+    './css/styles.css',
+    './css/dice-icons.css',
+    './css/animations.css',
+    './js/config.js',
+    './js/dice-icons.js',
+    './js/coin-svg.js',
+    './js/card-svg.js',
+    './js/state-manager.js',
+    './js/dice-engine.js',
+    './js/animation-engine.js',
+    './js/ui-controller.js',
+    './js/navigation.js',
+    './js/app.js',
+    './js/pwa.js',
+    './manifest.json'
 ];
 
 // Install event - cache assets
@@ -90,7 +94,7 @@ self.addEventListener('fetch', (event) => {
                     .catch(() => {
                         // If both cache and network fail, return offline page
                         if (event.request.mode === 'navigate') {
-                            return caches.match('/index.html');
+                            return caches.match('./index.html');
                         }
                     });
             })
@@ -127,8 +131,8 @@ self.addEventListener('push', (event) => {
     const title = data.title || 'Dice Roller';
     const options = {
         body: data.body || 'You have a new notification',
-        icon: '/icons/icon-192.png',
-        badge: '/icons/icon-72.png',
+        icon: './icons/icon-192.png',
+        badge: './icons/icon-72.png',
         data: data
     };
 
@@ -146,14 +150,14 @@ self.addEventListener('notificationclick', (event) => {
             .then((clientList) => {
                 // If app is already open, focus it
                 for (const client of clientList) {
-                    if (client.url === '/' && 'focus' in client) {
+                    if (client.url.endsWith('/') && 'focus' in client) {
                         return client.focus();
                     }
                 }
                 
                 // Otherwise open new window
                 if (clients.openWindow) {
-                    return clients.openWindow('/');
+                    return clients.openWindow('./');
                 }
             })
     );

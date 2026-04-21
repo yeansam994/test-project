@@ -2,7 +2,7 @@
   "name": "Dice Roller - Tabletop RPG Companion",
   "short_name": "Dice Roller",
   "description": "A mobile-first tabletop dice roller with 3D animations for RPG games",
-  "start_url": "/",
+  "start_url": "./",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#000000",

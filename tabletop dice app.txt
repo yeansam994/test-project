@@ -1,0 +1,306 @@
+# PRD: Tabletop Dice Roller Web App
+
+### TL;DR
+
+A mobile-first web app for tabletop gamers that allows dice rolling with configurable dice types and quantities, animated roll results, and a clean calculation display. Built for general tabletop use cases (board games, RPGs, and casual group play). Future phases will introduce multiplayer score tracking and dynamic per-instance dice management for seamless social gaming experiences.
+
+---
+
+## Goals
+
+### Business Goals
+
+* Grow a highly engaged user base among tabletop gaming communities.
+* Establish the app as a go-to utility for general tabletop gaming sessions (board games, RPGs, etc.).
+* Build a robust foundation for monetization via premium or advanced features in the future.
+* Achieve high visibility through organic shareability and PWA/mobile installs within 3 months post-launch.
+
+### User Goals
+
+* Enable instant, intuitive configuration and rolling of any combination of standard tabletop dice (d4, d6, d8, d10, d12, d20, d100).
+* Deliver an engaging, clear, and satisfying animated rolling experience.
+* Instantly display the total sum of dice rolled, removing the need for manual calculations.
+* Support rapid repeat rolls and on-the-fly reconfiguration to match real game play.
+* Offer a utility that works for nearly any tabletop game environment, reducing dependency on physical dice.
+
+### Non-Goals
+
+* No game-specific rule engines or lookup tools (e.g., D&D spell lists, character sheets).
+* No user account registration or login in Phase 1.
+
+No user account registration or login in Phase 1.
+
+* No real-time multiplayer synchronization, chat, cross-device multiplayer, or cloud-based game state sharing in Phase 1 or Phase 2. Phase 2 is strictly a local session-only multiplayer experience: all players share one device; no backend or cross-device joining is supported.
+
+No real-time multiplayer synchronization, chat, cross-device multiplayer, or cloud-based game state sharing in Phase 1 or Phase 2. Phase 2 is strictly a local session-only multiplayer experience: all players share one device; no backend or cross-device joining is supported.
+
+---
+
+## User Stories
+
+**Personas:**
+
+* *Casual Board Gamer* (uses mostly standard six-sided dice)
+* *RPG Player* (needs full spread: d4, d6, d8, d10, d12, d20, d100)
+* *Game Night Host* (facilitates multiple players, tracks results across turns)
+
+**Stories:**
+
+*Casual Board Gamer*
+
+* As a casual board gamer, I want to select the number of six-sided dice, so that I can quickly roll for my turn in any game.
+* As a casual board gamer, I want to see an animation of the dice rolling, so that my roll feels authentic and fun.
+* As a casual board gamer, I want an instant total of my roll, so I don't have to do mental math.
+
+*RPG Player*
+
+* As an RPG player, I want to select dice of different face types (d4, d6, d8, d10, d12, d20, d100), so that the tool adapts to any RPG mechanic.
+* As an RPG player, I want to roll a mix of dice (e.g., 2d6 + 1d8) in one session, so I don't interrupt game flow for each roll.
+* As an RPG player, I want to see the individual results as well as the total, so I can apply critical hit or other modifiers as needed.
+
+*Game Night Host*
+
+* As a game night host, I want to manage multiple players' rolls and totals (future), so I can keep the group organized.
+* As a game night host, I want to add/remove dice mid-session without losing other configuration (future), so the tool fits changing game needs.
+* As a game night host, I want a quick session roll history (future), so I can refer back to previous actions.
+
+---
+
+## Functional Requirements
+
+### Core Phase Features
+
+* **Dice Configuration** (Priority: High) ✅ IMPLEMENTED
+  * *Select Dice Face Type*: Choose from standard dice (d4, d6, d8, d10, d12, d20, d100).
+  * *Select Dice Quantity*: Select any number of dice per face type (defaults to 1, supports at least 1–10+).
+* **Roll Engine** (Priority: High) ✅ IMPLEMENTED
+  * *Calculate Total*: Instantly sum the rolled values and display clearly.
+  * *Per-Die Results*: Show each die's result, visually separated by dice type.
+  * *Session Roll History*: Display previous rolls for the current session (optional in Core, must-have in later phase). ✅ IMPLEMENTED
+* **Dice Animation** (Priority: Medium) ✅ IMPLEMENTED
+  * *Animated Dice Roll*: Show a short (sub-2-second) rolling animation per die, visually reflecting dice face type and count.
+* **UX for Mobile** (Priority: High) ✅ IMPLEMENTED
+  * *Large Tap Targets*: All controls must be easily usable on mobile screens.
+  * *High Contrast Display*: Results and controls must be legible in variable lighting.
+
+### Navigation & Multi-Feature Support ⭐ NEW
+
+* **Burger Menu Navigation** (Priority: High) ✅ IMPLEMENTED
+  * *Hamburger Menu Icon*: Top-left corner button with three-line icon that animates to X when active.
+  * *Side Navigation Drawer*: 280px wide drawer that slides in from the left with smooth transitions.
+  * *Feature Switching*: Toggle between different app features (Dice Roller, Coin Tosser, etc.).
+  * *Visual Feedback*: Active feature highlighted with accent color and left border indicator.
+  * *Overlay System*: Semi-transparent backdrop when menu is open; clicking overlay closes menu.
+  * *Keyboard Support*: ESC key closes the navigation menu.
+
+* **Coin Tosser Feature** (Priority: Medium) ✅ IMPLEMENTED
+  * *Simple Coin Flip*: Random 50/50 heads or tails result.
+  * *Animated Result*: 3D coin flip animation (1080-degree rotation over 0.6 seconds).
+  * *Visual Display*: Large circular coin display (200px) with emoji representation.
+  * *Result Text*: Clear "HEADS" or "TAILS" text display with pop-in animation.
+  * *Toss Button*: Large, touch-friendly button matching dice roller style.
+  * *Lazy Loading*: Coin tosser initializes only when first accessed for performance.
+
+### Future Phase Features
+
+* Multiplayer Record (Priority: Next after Core) — Local session only: Player Profiles and per-player roll history are stored in local/session storage scoped to one shared device. No cloud sync or cross-device joining.
+
+Multiplayer Record (Priority: Next after Core) — Local session only
+
+* 
+  *  device-scoped).
+  * Score Tracking: Maintain ongoing totals per player (e.g., for campaign or board game points) saved to local/session storage only — no backend or cloud synchronization.
+
+  Multiplayer Record (Priority: Next after Core)
+* **Dynamic Dice Management** (Priority: After Multiplayer)
+  * *Add/Remove Dice On-the-Fly*: Adjust the dice pool mid-session (without wiping all configuration or restarting the app).
+
+---
+
+## User Experience
+
+**Entry Point & First-Time User Experience**
+
+* Users access the web app via direct mobile browser link or app icon (as PWA).
+* Users land directly on the dice configuration screen; no onboarding, sign-up, or tutorial required.
+* The UI presents visually distinct dice types (icons/images) and simple controls for quantity.
+* A brief first-use tooltip ("Tap dice to select type, tap +/– to set quantity, hit 'Roll'") may appear for new users.
+
+**Core Experience**
+
+* **Step 1:** User selects dice face type(s) via a horizontal scroll or grid of dice icons (d4–d100).
+  * Large, tappable icons with tooltips on long-press.
+  * Disabled state if max number of dice per type is reached or zero is selected.
+* **Step 2:** User sets the number of each dice for the roll.
+  * Increment/decrement buttons (stepper), quantity field, or tap-and-hold for faster adjustment.
+  * Minimum one die must be selected; cannot proceed on zero.
+* **Step 3:** User taps "Roll" button.
+  * Button is visually prominent, locked if no dice selected.
+* **Step 4:** Dice roll animation plays.
+  * Each die visually animates (3D or pseudo-3D effect).
+  * All dice animate concurrently, result faces land in less than 2 seconds.
+  * If >10 dice, switch to simplified animation to maintain performance.
+* **Step 5:** Results display.
+  * Individual die results shown as images/numbers.
+  * Running total is mathematically correct and visually emphasized.
+  * An option to "re-roll" or "change configuration" is easy to access.
+* **Repeat:** User can adjust dice or re-roll instantly, no reload required.
+
+**Advanced Features & Edge Cases**
+
+* If user attempts to roll with zero dice selected, display a friendly prompt ("Please select at least one die").
+* When more than 10 dice are selected, animation switches to a lightweight mode (e.g., number flip effect) to avoid lag.
+* The UI adapts gracefully to all common mobile aspect ratios (portrait and landscape).
+* If device is low on resources, automatically degrade animation quality.
+
+**UI/UX Highlights**
+
+* Large, touch-friendly controls and high contrast for legibility in dimly-lit settings.
+* Each dice type visually distinct—shapes/colors match common physical dice.
+* Animated transitions are fast (sub-2-seconds) but visually satisfying.
+* Responsive layout for all modern mobile devices; clean fallback states for unsupported screens.
+
+---
+
+## Narrative
+
+It's Friday night and a group of friends sits around a table, deep into an RPG campaign. Suddenly, someone's critical damage roll lands their only d20 under the couch. Rather than hunting for it, the DM whips out their phone, pulls up the Tabletop Dice Roller, and in under five seconds, selects "3d6" for the fireball. The app's crisp dice animation rolls across the screen, the total appears instantly, and the game moves forward without distraction. No arguments about the fairness of a roll, no losing track of what was rolled—just seamless play. Over several sessions, the group adopts the multiplayer tracker, letting each player's scores and special rolls accumulate. What started as a time-saving tool quickly becomes an essential session companion, trusted by everyone at the table.
+
+---
+
+## Success Metrics
+
+### User-Centric Metrics
+
+* Average session length per user (tracked via session start/end)
+* Number of rolls per session (interaction depth)
+* Weekly return user rate (% of previous week's users who return)
+* User satisfaction rating collected with lightweight in-app survey
+
+### Business Metrics
+
+* Monthly active user count (MAU)
+* PWA/mobile app install rate (number of homescreen/app installs)
+* Early adoption rates for premium future features (when launched)
+* Organic share/word-of-mouth metrics (referral code usage, if tracked)
+
+### Technical Metrics
+
+* Average roll animation render time (<2 seconds on target devices)
+* Total page load/perceived app readiness time (<3 seconds on typical 4G)
+* Number of critical calculation or UI bugs detected in production (target: 0)
+
+### Tracking Plan
+
+* Dice type(s) selected (event)
+* Dice quantity selected (event)
+* Roll initiated (event)
+* Roll animation completed (event)
+* Total displayed (event)
+* Re-roll triggered (event)
+* (Future) Player profile created (event)
+* (Future) Score recorded (event)
+
+---
+
+## Technical Considerations
+
+### Technical Needs
+
+* Single-page application (SPA) or lightweight PWA frontend for instant interaction
+* Random number generation (RNG) performed client-side, reliably seeded per session
+* Visual dice animations implemented via CSS/JS animation libraries or lightweight custom code
+* Modular architecture to support and extend with multiplayer/score features later
+
+### Integration Points
+
+* No external or third-party integrations required for Phase 1
+* Future: Possible integration with cloud storage or local device storage for session persistence (multiplayer, history)
+
+### Data Storage & Privacy
+
+* Phase 1: stateless—no user data is stored on a backend
+* No personal info collected; session data is transient and local to browser
+* Future multiplayer phase: will require local/session storage only (scoped to the device and shared among players on that device); no cloud sync or cross-device features required.
+
+Future multiplayer phase: will require local/session storage only (scoped to the device and shared among players on that device); no cloud sync or cross-device features required.
+
+* Must follow regional privacy standards if user data is ever collected
+
+### Scalability & Performance
+
+* Designed for 100% client-side scalability; supports virtually unlimited concurrent users
+* Animation must remain smooth on low-end mobile devices and degrade gracefully if required
+* Delivered via CDN for global availability and low latency
+
+### Potential Challenges
+
+* Ensuring sufficient randomness for perceived fairness (possible user skepticism about digital rolls)
+* Delivering smooth, visually engaging dice animations without lag—even when rolling large quantities of dice
+* Designing and scaling authentic, accessible dice visuals for d4 through d100
+* Ensuring responsive/adaptive layout for various mobile screens
+
+---
+
+## Milestones & Sequencing
+
+### Project Estimate
+
+* Overall: Medium (3–5 weeks total, spread across sequential phases)
+
+### Team Size & Composition
+
+* Small, lean team: 1 frontend developer (handles animations, interaction, and logic), 1 UI/UX designer (may overlap roles if personnel is limited)
+
+### Suggested Phases
+
+**Phase 1 – Core Dice Roller (2 weeks)**
+
+* Key Deliverables: Dice face/quantity configuration UI (Frontend Dev/Designer), roll engine logic (Frontend Dev), dice animation module (Frontend Dev), results display.
+* Dependencies: Completion of visual assets for dice, finalized component architecture.
+
+**Phase 2 – Multiplayer Records (1–2 weeks)**
+
+* Key Deliverables: Player profile/session setup UI, per-player roll history, score display and assignment logic (local/session storage only; device-scoped).
+* Dependencies: Stable core app, schema for per-session data, simple local storage mechanism. Note: Phase 2 is a local session-only experience — all players share one device; no backend or cross-device joining.
+
+Phase 2 – Multiplayer Records (1–2 weeks)
+
+**Phase 3 – Dynamic Dice Management (1 week)**
+
+* Key Deliverables: UI and logic to add/remove individual dice during a session; seamless state updates without client reset.
+* Dependencies: Core configuration engine must be modular and persist per-instance state.
+
+---
+
+## Current Implementation Status ⭐ UPDATED
+
+### Phase 1: Core Dice Roller ✅ COMPLETE
+* All dice configuration features implemented (7 dice types, counter-based selection)
+* Roll engine with total calculation and per-die results fully functional
+* Session roll history with modal display and clear functionality
+* Animated single-dice rolling effect (sub-2-second duration)
+* Mobile-first responsive design with large tap targets
+* PWA support with offline capabilities
+
+### Phase 1.5: Navigation & Multi-Feature Framework ✅ COMPLETE
+* Burger menu navigation system implemented
+* Side navigation drawer with feature switching
+* Coin tosser feature as proof-of-concept for multi-feature support
+* Feature container system for scalable feature additions
+* Dynamic header title updates based on active feature
+
+### Phase 2: Multiplayer Records ⏳ PENDING
+* Local session player profiles (not started)
+* Per-player roll history (not started)
+* Score tracking system (not started)
+
+### Phase 3: Dynamic Dice Management ⏳ PENDING
+* On-the-fly dice pool adjustment (not started)
+
+### Recent Additions (April 2026)
+* **Navigation System**: Hamburger menu, side drawer, feature switching, overlay system
+* **Coin Tosser**: Random heads/tails flip with 3D animation, toss button, result display
+* **Framework Updates**: Modular feature container system supporting future tool additions
+
+---

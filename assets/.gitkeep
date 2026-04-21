@@ -1,0 +1,8 @@
+# Assets Directory
+
+This folder contains static assets for the Dice Roller application.
+
+## Structure:
+- `/icons` - PWA and app icons
+- `/images` - Images and graphics (if needed)
+- `/fonts` - Custom fonts (if needed)

@@ -1,0 +1,8 @@
+# Fonts Directory
+
+Place custom web fonts here (optional)
+
+## Recommended format:
+- WOFF2 (best compression)
+- WOFF (fallback)
+- TTF (legacy support)

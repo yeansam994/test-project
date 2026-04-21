@@ -1,0 +1,80 @@
+/* ============================================
+   SIMPLE DICE ANIMATION
+   Single dice rolling animation for all rolls
+   ============================================ */
+
+/* Single die animation - centered on screen */
+.animated-die.single-die {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 4rem;
+    transform-style: preserve-3d;
+    perspective: 1000px;
+    pointer-events: none;
+    animation: singleDiceRoll 1.2s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    z-index: 9999;
+}
+
+/* Simple rolling animation */
+@keyframes singleDiceRoll {
+    0% {
+        transform: translate(-50%, -50%) rotateX(0deg) rotateY(0deg) scale(0.5);
+        opacity: 0;
+    }
+    
+    10% {
+        opacity: 1;
+    }
+    
+    25% {
+        transform: translate(-50%, -50%) rotateX(180deg) rotateY(180deg) scale(1.2);
+    }
+    
+    50% {
+        transform: translate(-50%, -50%) rotateX(360deg) rotateY(360deg) scale(1);
+    }
+    
+    75% {
+        transform: translate(-50%, -50%) rotateX(540deg) rotateY(540deg) scale(1.1);
+    }
+    
+    90% {
+        transform: translate(-50%, -50%) rotateX(720deg) rotateY(720deg) scale(1.05);
+    }
+    
+    100% {
+        transform: translate(-50%, -50%) rotateX(720deg) rotateY(720deg) scale(1);
+        opacity: 1;
+    }
+}
+
+
+/* Fade out animation after results shown */
+@keyframes diceFadeOut {
+    0% {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
+    100% {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+}
+
+.animated-die.fade-out {
+    animation: diceFadeOut 0.3s ease-out forwards;
+}
+
+/* Performance optimization for low-end devices */
+@media (prefers-reduced-motion: reduce) {
+    .animated-die.single-die {
+        animation-duration: 0.6s;
+    }
+}

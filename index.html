@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="theme-color" content="#000000">
+    <meta name="description" content="A mobile-first tabletop dice roller with 3D animations">
+    
+    <title>Dice Roller</title>
+    
+    <!-- PWA Support -->
+    <link rel="manifest" href="manifest.json">
+    <link rel="apple-touch-icon" href="icons/icon-192.png">
+    
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="css/dice-icons.css">
+    <link rel="stylesheet" href="css/animations.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="app-header">
+            <button class="burger-menu" id="burgerMenu" aria-label="Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <h1 id="appTitle">Dice Roller</h1>
+        </header>
+
+        <!-- Side Navigation Menu -->
+        <nav class="side-nav" id="sideNav">
+            <div class="side-nav-header">
+                <h2>Menu</h2>
+                <button class="close-nav-button" id="closeNavButton" aria-label="Close Menu">&times;</button>
+            </div>
+            <ul class="nav-menu">
+                <li>
+                    <button class="nav-item active" data-feature="dice-roller">
+                        <span class="nav-icon">🎲</span>
+                        <span class="nav-label">Dice Roller</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-item" data-feature="coin-tosser">
+                        <span class="nav-icon">🪙</span>
+                        <span class="nav-label">Coin Tosser</span>
+                    </button>
+                </li>
+                <li>
+                    <button class="nav-item" data-feature="card-game">
+                        <span class="nav-icon">🃏</span>
+                        <span class="nav-label">Card Game</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+        <!-- Navigation Overlay -->
+        <div class="nav-overlay" id="navOverlay"></div>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Dice Roller Feature -->
+            <div class="feature-container active" id="diceRollerFeature">
+            <!-- Results Section - Moved to Top -->
+            <section class="results-section" id="resultsSection">
+                <div class="results-container" id="resultsContainer">
+                    <!-- Results will be displayed here -->
+                    <div class="empty-state" id="emptyState">
+                        <p>🎲 Select dice below and press ROLL to get started!</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Roll Button -->
+            <section class="roll-section">
+                <button class="roll-button" id="rollButton" aria-label="Roll Dice">
+                    <span class="roll-text">ROLL</span>
+                    <span class="roll-icon">🎲</span>
+                </button>
+                <div class="action-buttons">
+                    <button class="reset-button" id="resetButton" aria-label="Reset All">
+                        <span>Reset</span>
+                    </button>
+                    <button class="history-button" id="historyButton" aria-label="View History">
+                        <span>History</span>
+                    </button>
+                </div>
+            </section>
+
+            <!-- Dice Selection Section -->
+            <section class="dice-selection" id="diceSelection">
+                <h2>Select Your Dice</h2>
+                <div class="dice-grid" id="diceGrid">
+                    <!-- Dice cards will be dynamically generated -->
+                </div>
+            </section>
+            </div>
+            <!-- End Dice Roller Feature -->
+
+            <!-- Coin Tosser Feature -->
+            <div class="feature-container" id="coinTosserFeature">
+                <section class="coin-section">
+                    <div class="coin-result-container" id="coinResultContainer">
+                        <div class="empty-state">
+                            <p>🪙 Press TOSS to flip the coin!</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="toss-section">
+                    <button class="toss-button" id="tossButton" aria-label="Toss Coin">
+                        <span class="toss-text">TOSS</span>
+                        <span class="toss-icon">🪙</span>
+                    </button>
+                </section>
+            </div>
+            <!-- End Coin Tosser Feature -->
+
+            <!-- Card Game Feature -->
+            <div class="feature-container" id="cardGameFeature">
+                <section class="card-display-section">
+                    <div class="cards-container">
+                        <!-- Visible Card -->
+                        <div class="card-wrapper">
+                            <div class="card-label">Current Card</div>
+                            <div class="card visible-card" id="visibleCard">
+                                <!-- Card SVG will be inserted here -->
+                            </div>
+                        </div>
+
+                        <!-- Hidden Card -->
+                        <div class="card-wrapper">
+                            <div class="card-label">Mystery Card</div>
+                            <div class="card hidden-card" id="hiddenCard">
+                                <!-- Card back will be shown here -->
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="game-info-section">
+                    <div class="game-status" id="gameStatus">
+                        <p>Will the mystery card be higher or lower?</p>
+                    </div>
+                    <div class="score-display" id="scoreDisplay">
+                        <span class="score-label">Score:</span>
+                        <span class="score-value" id="scoreValue">0</span>
+                    </div>
+                </section>
+
+                <section class="guess-section">
+                    <div class="guess-buttons">
+                        <button class="guess-button lower-button" id="lowerButton" aria-label="Guess Lower">
+                            <span class="guess-icon">▼</span>
+                            <span class="guess-text">LOWER</span>
+                        </button>
+                        <button class="guess-button higher-button" id="higherButton" aria-label="Guess Higher">
+                            <span class="guess-icon">▲</span>
+                            <span class="guess-text">HIGHER</span>
+                        </button>
+                    </div>
+                    <button class="new-game-button" id="newGameButton" aria-label="New Game">
+                        <span>🔄 New Game</span>
+                    </button>
+                </section>
+            </div>
+            <!-- End Card Game Feature -->
+        </main>
+
+        <!-- Animation Canvas -->
+        <div class="dice-animation-container" id="diceAnimationContainer">
+            <!-- Animated dice will appear here -->
+        </div>
+
+        <!-- History Modal -->
+        <div class="history-modal" id="historyModal">
+            <div class="history-modal-content">
+                <div class="history-header">
+                    <h2>Roll History</h2>
+                    <button class="close-button" id="closeHistoryButton" aria-label="Close">&times;</button>
+                </div>
+                <div class="history-body" id="historyBody">
+                    <!-- History items will be inserted here -->
+                </div>
+                <div class="history-footer">
+                    <button class="clear-history-button" id="clearHistoryButton">Clear History</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/dice-icons.js"></script>
+    <script src="js/coin-svg.js"></script>
+    <script src="js/card-svg.js"></script>
+    <script src="js/state-manager.js"></script>
+    <script src="js/dice-engine.js"></script>
+    <script src="js/animation-engine.js"></script>
+    <script src="js/ui-controller.js"></script>
+    <script src="js/navigation.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/pwa.js"></script>
+</body>
+</html>
